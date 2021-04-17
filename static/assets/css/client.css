@@ -1,0 +1,18 @@
+.typing::after {
+    content: '';
+    /* position: absolute; */
+    width: 25px;
+    height: 28px;
+    /* margin-bottom: .8rem; */
+    border-right: 2px solid white;
+    animation: blink 0.5s infinite ease;
+}
+
+@keyframes blink {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
