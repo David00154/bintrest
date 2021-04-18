@@ -47,7 +47,7 @@ router.post("/withdraw", (req, res) => {
     !phone ||
     !country
   ) {
-    req.flash("error_msg", "A fields are required");
+    req.flash("error_msg", "All fields are required");
     res.redirect("/dashboard/withdraw");
   }
   if (password !== re_password) {
