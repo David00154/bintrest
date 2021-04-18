@@ -15,7 +15,7 @@ export default function DashboardLayout(props) {
             content="width=device-width, initial-scale=1.0"
           />
           <link rel="stylesheet" href="/assets/css/tailwind.css" />
-          <title>Dashboard</title>
+          <title>{props.title} | BINTREST CRYPTO TRADE</title>
         </head>
         <body>
           <div className="leading-normal tracking-normal" id="main-body">
@@ -45,7 +45,9 @@ export default function DashboardLayout(props) {
               $("#nav-click").on("click", () => {
                 $("#main-nav")[0].classList.toggle("hidden")
               })
+              // console.log($("#alert-close"))
               $("#alert-close").on("click", () => {
+                // console.log($("#alert"))
                 $("#alert")[0].classList.toggle("hidden")
               })
             `,

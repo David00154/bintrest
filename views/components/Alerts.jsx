@@ -110,7 +110,7 @@ function Error_Msg_Alert(props) {
 }
 
 export default function Alerts(props) {
-  console.log(props);
+  // console.log(props);
   // console.log(5, props.error_msg, typeof props.error_msg);
   if (props.errors) {
     return <Errors errors={props.errors} />;

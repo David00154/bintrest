@@ -10,7 +10,7 @@ export default function SignUp(props) {
         {/* <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> */}
         <p id="profile-name" className="profile-name-card"></p>
 
-        <Alerts {...props} />
+        <Alerts title={"Signup"} {...props} />
 
         <form className="form-signin" action="/user/signup" method="POST">
           <h2 className="text-center mb-3">Signup</h2>

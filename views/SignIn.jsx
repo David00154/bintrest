@@ -5,7 +5,7 @@ import Alerts from "./components/Alerts.jsx";
 export default function SignIn(props) {
   // console.log(props);
   return (
-    <AuthLayout>
+    <AuthLayout title="Login" {...props}>
       <div className="card card-container">
         {/* <!-- <img className="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> --> */}
         {/* <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> */}

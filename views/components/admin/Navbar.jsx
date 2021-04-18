@@ -13,9 +13,6 @@ export default function Navbar(props) {
               <button
                 className="hover:text-blue-500 hover:border-white focus:outline-none navbar-burger"
                 id="nav-click"
-                onclick={() => {
-                  console.log("Helo");
-                }}
               >
                 <svg
                   className="h-5 w-5"
@@ -38,20 +35,50 @@ export default function Navbar(props) {
                     </svg> */}
             {/* </button> */}
           </div>
-        </div>
 
-        {/* <!-- right navbar --> */}
-        {/* <div className="flex items-center relative">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" className="fill-current mr-3 hover:text-blue-500"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg> */}
-        {/* <img src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg" className="w-12 h-12 rounded-full shadow-lg" @click="dropDownOpen = !dropDownOpen"> */}
-        {/* <img src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg" className="w-12 h-12 rounded-full shadow-lg" />
+          {/* <!-- right navbar --> */}
+          <div className="flex items-center relative">
+            <a href="/" className="mr-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                height={28}
+                width={28}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+            </a>
+            <a href="/dashboard/notifications">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="28"
+                viewBox="0 0 24 24"
+                width="28"
+                className="fill-current mr-3 hover:text-blue-500"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
+              </svg>
+            </a>
+            <img
+              src="https://th.bing.com/th/id/OIP.JTdTmffYtgl20jwm6Bw1dQHaHa?pid=ImgDet&rs=1"
+              className="w-12 h-12 rounded-full shadow-lg"
+            />
+            {/* <img src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg" className="w-12 h-12 rounded-full shadow-lg" />
               </div> */}
+          </div>
 
-        {/* </div> */}
-
-        {/* <!-- dropdown menu --> */}
-        {/* <div className="absolute bg-gray-100 border border-t-0 shadow-xl text-gray-700 rounded-b-lg w-48 bottom-10 right-0 mr-6" :className="dropDownOpen ? '' : 'hidden'"> */}
-        <div className="absolute bg-gray-100 border border-t-0 shadow-xl text-gray-700 rounded-b-lg w-48 bottom-10 right-0 mr-6 hidden">
+          {/* <!-- dropdown menu --> */}
+          {/* <div className="absolute bg-gray-100 border border-t-0 shadow-xl text-gray-700 rounded-b-lg w-48 bottom-10 right-0 mr-6" :className="dropDownOpen ? '' : 'hidden'"> */}
+          {/* <div className="absolute bg-gray-100 border border-t-0 shadow-xl text-gray-700 rounded-b-lg w-48 bottom-10 right-0 mr-6 hidden">
           <a href="#" className="block px-4 py-2 hover:bg-gray-200">
             Account
           </a>
@@ -61,8 +88,9 @@ export default function Navbar(props) {
           <a href="#" className="block px-4 py-2 hover:bg-gray-200">
             Logout
           </a>
+        </div> */}
+          {/* <!-- dropdown menu end --> */}
         </div>
-        {/* <!-- dropdown menu end --> */}
       </div>
     </>
   );

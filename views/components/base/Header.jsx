@@ -34,7 +34,7 @@ export default function Header(props) {
       <header id="header" className="d-flex align-items-center">
         <div className="container d-flex align-items-center justify-content-between">
           <h1 className="logo">
-            <a href="index.html">BINTREST</a>
+            <a href="/">BINTREST</a>
           </h1>
           {/* <!-- Uncomment below if you prefer to use an image logo --> */}
           {/* <!-- <a href="index.html" className="logo"><img src="assets/img/logo.png" alt="" className="img-fluid"></a>--> */}

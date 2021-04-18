@@ -54,4 +54,4 @@ app.use("/user", UserRouter);
 
 app.listen(process.env.PORT || 3000, console.log("Server running"));
 
-export { app };
+// export { app };
