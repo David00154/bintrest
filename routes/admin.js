@@ -34,13 +34,12 @@ router.get("/withdraw", (req, res) => {
 router.get("/notifications", (req, res) => {
   // console.log(req._parsedOriginalUrl);
   Notification.find({ user: req.user.id }).then((notifis) => {
-    if (notifis && notifis.length > 0) {
-      res.render("Notifications", {
-        user: req.user,
-        pathname: req._parsedOriginalUrl,
-        notifications: notifis,
-      });
-    }
+    console.log(notifis);
+    res.render("Notifications", {
+      user: req.user,
+      pathname: req._parsedOriginalUrl,
+      notifications: notifis,
+    });
   });
 });
 
