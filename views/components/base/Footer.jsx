@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function Footer(params) {
   return (
@@ -12,13 +12,12 @@ export default function Footer(params) {
                 <div class="footer-info">
                   <h3>BINTREST CRYPTO TRADE</h3>
                   <p>
-                    A108 Adam Street <br />
-                    NY 535022, USA
+                    Miami, Florida <br />
                     <br />
-                    <br />
+                    {/* <br />
                     <strong>Phone:</strong> +1 5589 55488 55
-                    <br />
-                    <strong>Email:</strong> info@example.com
+                    <br /> */}
+                    <strong>Email:</strong> bintrest-trade@gmail.com
                     <br />
                   </p>
                   <div class="social-links mt-3">
@@ -45,11 +44,11 @@ export default function Footer(params) {
                 <h4>Useful Links</h4>
                 <ul>
                   <li>
-                    <i class="bx bx-chevron-right"></i>{' '}
+                    <i class="bx bx-chevron-right"></i>{" "}
                     <a href="/user/login">Login</a>
                   </li>
                   <li>
-                    <i class="bx bx-chevron-right"></i>{' '}
+                    <i class="bx bx-chevron-right"></i>{" "}
                     <a href="/user/signup">Sign-up</a>
                   </li>
                   {/* <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
@@ -71,11 +70,11 @@ export default function Footer(params) {
 
               <div class="col-lg-4 col-md-6 footer-newsletter">
                 <h4>Our Newsletter</h4>
-                <p>
+                {/* <p>
                   Tamen quem nulla quae legam multos aute sint culpa legam
                   noster magna
-                </p>
-                <form action="" method="post">
+                </p> */}
+                <form action="/dashboard" method="get">
                   <input type="email" name="email" />
                   <input type="submit" value="Subscribe" />
                 </form>
@@ -86,7 +85,7 @@ export default function Footer(params) {
 
         <div class="container">
           <div class="copyright">
-            &copy; Copyright{' '}
+            &copy; Copyright{" "}
             <strong>
               <span>BINTREST CRYPTO TRADE</span>
             </strong>

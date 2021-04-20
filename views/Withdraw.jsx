@@ -34,7 +34,7 @@ function Alert(props) {
 }
 
 export default function Withdraw(props) {
-  console.log(props.error_msg);
+  // console.log(props.error_msg);
   // console.log(props.error_msg);
   return (
     <DashboardLayout title="Withdraw" {...props}>
@@ -98,7 +98,7 @@ export default function Withdraw(props) {
           <form action="/dashboard/withdraw" method="POST" className="w-full">
             <div className="flex flex-row justify-center w-full mb-3">
               <input
-                type="text"
+                type="email"
                 className="focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3 mr-3"
                 placeholder="Email"
                 name="email"
@@ -106,7 +106,7 @@ export default function Withdraw(props) {
               />
 
               <input
-                type="text"
+                type="password"
                 className="focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3"
                 placeholder="Password"
                 name="password"
@@ -123,7 +123,7 @@ export default function Withdraw(props) {
                 value={props.address || ""}
               />
               <input
-                type="text"
+                type="password"
                 className="focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3"
                 placeholder="Retype Password"
                 name="re_password"
@@ -181,6 +181,23 @@ export default function Withdraw(props) {
                 Apple pay
               </option>
             </select>
+
+            <div className="flex flex-row justify-center w-full mb-3">
+              <input
+                type="text"
+                className="focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3 mr-3"
+                placeholder="Account Number"
+                name="accnt_num"
+                value={props.address || ""}
+              />
+              <input
+                type="text"
+                className="focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3"
+                placeholder="Account Name"
+                name="accnt_name"
+                value={props.amount || ""}
+              />
+            </div>
 
             <div className="flex flex-row justify-center w-full mb-3">
               <input

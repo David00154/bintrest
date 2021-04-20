@@ -1,4 +1,5 @@
 import React from "react";
+import Popup from "../components/Popup";
 
 export default function DefaultLayout(props) {
   return (
@@ -66,6 +67,7 @@ export default function DefaultLayout(props) {
             <i class="bi bi-arrow-up-short"></i>
           </a>
           <div id="preloader"></div>
+          <Popup />
 
           {/* <!-- Vendor JS Files --> */}
           <script src="/assets/js/jquery.js"></script>
@@ -80,6 +82,7 @@ export default function DefaultLayout(props) {
           {/* <script src="/assets/js/jquery.js"></script> */}
           <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
           <script src="/assets/js/main.js"></script>
+          <script src="/assets/js/faker.js"></script>
           <script src="/client.js"></script>
           <script src="/assets/js/animations.js"></script>
           <script src="/register-service-worker.js"></script>

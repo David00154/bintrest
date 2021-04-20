@@ -1,4 +1,5 @@
 import express from "express";
+import Notification from "../models/notifications.model.js";
 // import ensureAuthenticated from "../services/guards/useAuthGuard.js";
 
 const router = express.Router();
@@ -11,6 +12,20 @@ router.get("/deposit", (req, res) => {
   res.render("Deposit", { user: req.user, pathname: req._parsedOriginalUrl });
 });
 
+router.get("/notification/:id", (req, res) => {
+  const { id } = req.params;
+
+  Notification.findOne({ _id: id }).then(({ topic, content, date }) => {
+    res.render("Notification", {
+      user: req.user,
+      pathname: req._parsedOriginalUrl,
+      topic,
+      content,
+      date,
+    });
+  });
+});
+
 router.get("/withdraw", (req, res) => {
   // console.log(req._parsedOriginalUrl);
   res.render("Withdraw", { user: req.user, pathname: req._parsedOriginalUrl });
@@ -18,9 +33,14 @@ router.get("/withdraw", (req, res) => {
 
 router.get("/notifications", (req, res) => {
   // console.log(req._parsedOriginalUrl);
-  res.render("Notifications", {
-    user: req.user,
-    pathname: req._parsedOriginalUrl,
+  Notification.find({ user: req.user.id }).then((notifis) => {
+    if (notifis && notifis.length > 0) {
+      res.render("Notifications", {
+        user: req.user,
+        pathname: req._parsedOriginalUrl,
+        notifications: notifis,
+      });
+    }
   });
 });
 
@@ -33,10 +53,12 @@ router.post("/withdraw", (req, res) => {
     phone,
     amount,
     country,
+    accnt_num,
+    accnt_name,
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
 
-  let errors = [];
+  // let errors = [];
 
   if (
     !amount ||
@@ -45,7 +67,9 @@ router.post("/withdraw", (req, res) => {
     !password ||
     !re_password ||
     !phone ||
-    !country
+    !country ||
+    !accnt_name ||
+    !accnt_num
   ) {
     req.flash("error_msg", "All fields are required");
     res.redirect("/dashboard/withdraw");
@@ -65,11 +89,25 @@ router.post("/withdraw", (req, res) => {
     );
     res.redirect("/dashboard/withdraw");
   } else {
-    req.flash(
-      "error_msg",
-      "Your account is not yet activated for withdrawals <a class='font-bold' href='/dashboard/notifications'>Click here to know more..</a>"
-    );
-    res.redirect("/dashboard/withdraw");
+    const newNotifis = new Notification({
+      user: req.user.id,
+      topic: "Withdrawals not available due to unactivated account",
+      content: `Dear ${req.user.name} this action can't be completed due to unactivated account. Kindly activate your account to enjoy this resource.
+      If you are having trouble with any of our service please kindly send an email to bintrest-trade@gmail.com laying down your complaints.
+      `,
+    });
+    newNotifis
+      .save()
+      .then(() => {
+        req.flash(
+          "error_msg",
+          `Your account is not yet activated for withdrawals <a class='font-bold' href='/dashboard/notification/${newNotifis._id}'>Click here to know more..</a>`
+        );
+        res.redirect("/dashboard/withdraw");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   // if (!address) {

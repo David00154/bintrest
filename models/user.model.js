@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+const Schema = mongoose.Schema
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -41,6 +42,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  notifications: [{ type: Schema.Types.ObjectId, ref: "Notifications" }],
   date: {
     type: Date,
     default: Date.now,

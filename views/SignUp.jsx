@@ -4,13 +4,13 @@ import Alerts from "./components/Alerts.jsx";
 
 export default function SignUp(props) {
   return (
-    <AuthLayout>
+    <AuthLayout title={"Signup"}>
       <div className="card card-container">
         {/* <!-- <img className="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> --> */}
         {/* <img id="profile-img" className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> */}
         <p id="profile-name" className="profile-name-card"></p>
 
-        <Alerts title={"Signup"} {...props} />
+        <Alerts {...props} />
 
         <form className="form-signin" action="/user/signup" method="POST">
           <h2 className="text-center mb-3">Signup</h2>
