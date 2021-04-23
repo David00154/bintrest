@@ -2,7 +2,7 @@
   "name": "bintrest-crypto",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "bundle.js",
   "scripts": {
     "start": "rollup main.js --format cjs --file bundle.js && node bundle.js",
     "dev": "rollup main.js --format cjs --file bundle.js && nodemon bundle.js"
