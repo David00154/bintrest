@@ -4,8 +4,9 @@
   "description": "",
   "main": "bundle.js",
   "scripts": {
-    "start": "rollup main.js --format cjs --file bundle.js && node bundle.js",
-    "dev": "rollup main.js --format cjs --file bundle.js && nodemon bundle.js"
+    "build": "rollup main.js --format cjs --file functions/bundle.js && netlify-lambda build functions",
+    "start": "nodemon functions/bundle.js",
+    "dev": "rollup main.js --format cjs --file functions/bundle.js && nodemon functions/bundle.js"
   },
   "keywords": [],
   "author": "",
@@ -17,11 +18,13 @@
     "express-session": "^1.17.1",
     "faker": "^5.5.3",
     "mongoose": "^5.12.4",
+    "netlify-lambda": "^2.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "rollup": "^2.45.2"
+    "rollup": "^2.45.2",
+    "serverless-http": "^2.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

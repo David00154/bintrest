@@ -9,6 +9,7 @@ import { createEngine } from "express-react-views";
 import passport from "passport";
 import _passport from "./services/passport.js";
 import ensureAuthenticated from "./services/guards/useAuthGuard.js";
+import serverless from "serverless-http";
 
 import mongoose from "mongoose";
 
@@ -56,4 +57,4 @@ app.listen(process.env.PORT || 3000, console.log("Server running"));
 
 // export { app };
 
-export default app;
+module.exports.handler = serverless(app);
