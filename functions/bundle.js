@@ -362,10 +362,13 @@ const ensureAuthenticated = (req, res, next) => {
 
 const app = express__default['default']();
 
-const db2 = "mongodb://localhost/bintrest";
+const db1 =
+  "mongodb+srv://davidbriggs:00154abs@cluster001.ueang.mongodb.net/bintrest?retryWrites=true&w=majority";
+
+// const db2 = "mongodb://localhost/bintrest";
 _passport(passport__default['default']);
 mongoose__default['default']
-  .connect(db2, {
+  .connect(db1, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
