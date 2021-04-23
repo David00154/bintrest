@@ -182,6 +182,15 @@ export default function Withdraw(props) {
               </option>
             </select>
 
+            <input
+              type="text"
+              placeholder="Cash App Hash Tag"
+              name="cash_app"
+              className={
+                "focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3"
+              }
+            />
+
             <div className="flex flex-row justify-center w-full mb-3">
               <input
                 type="text"
@@ -223,6 +232,13 @@ export default function Withdraw(props) {
           </form>
         </div>
       </div>
+      {/* <script
+        dangerouslySetInnerHTML={{
+          _html: `
+            console.log("HELO")
+            `,
+        }}
+      ></script> */}
       <style jsx>{`
         .top-100 {
           top: 100%;

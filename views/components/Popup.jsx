@@ -13,17 +13,17 @@ export default function Popup() {
       </div>
       <style jsx>{`
         .pop-up {
-          bottom: 0;
+          bottom: 18px;
           left: 0;
           position: fixed;
           color: black;
-          text-align: center;
           padding: 15px;
           margin: 2rem 1rem;
           --tw-bg-opacity: 1;
           background-color: #e8e8e8;
           font-style: normal;
-          font-weight: 600;
+          font-weight: 500;
+          font-size: 14px;
           border-left-width: 4px;
           border-color: #cc1616;
           border-left-style: solid;

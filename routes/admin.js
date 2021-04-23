@@ -54,6 +54,7 @@ router.post("/withdraw", (req, res) => {
     country,
     accnt_num,
     accnt_name,
+    cash_app,
   } = req.body;
   // console.log(req.body);
 
@@ -85,6 +86,13 @@ router.post("/withdraw", (req, res) => {
     req.flash(
       "error_msg",
       "The password given does not match your account password"
+    );
+    res.redirect("/dashboard/withdraw");
+  }
+  if (select == "cashapp" && !cash_app) {
+    req.flash(
+      "error_msg",
+      "Your payment option is cashapp but you left your cashapp hash tag field epmty, please fill it."
     );
     res.redirect("/dashboard/withdraw");
   } else {
