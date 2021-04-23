@@ -4,9 +4,9 @@
   "description": "",
   "main": "bundle.js",
   "scripts": {
-    "build": "rollup main.js --format cjs --file functions/bundle.js && netlify-lambda build functions",
-    "start": "nodemon functions/bundle.js",
-    "dev": "rollup main.js --format cjs --file functions/bundle.js && nodemon functions/bundle.js"
+    "build": "rollup main.js --format cjs --file bundle.js",
+    "start": "nodemon bundle.js",
+    "dev": "rollup main.js --format cjs --file bundle.js && nodemon bundle.js"
   },
   "keywords": [],
   "author": "",
