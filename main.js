@@ -20,7 +20,7 @@ const db1 =
 const db2 = "mongodb://localhost/bintrest";
 _passport(passport);
 mongoose
-  .connect(db1, {
+  .connect(db2, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

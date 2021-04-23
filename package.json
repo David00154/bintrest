@@ -4,13 +4,12 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js",
-    "dev": "nodemon main.js"
+    "start": "rollup main.js --format cjs --file bundle.js && node bundle.js",
+    "dev": "rollup main.js --format cjs --file bundle.js && nodemon bundle.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "connect-flash": "^0.1.1",
     "express": "^4.17.1",
@@ -21,7 +20,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "rollup": "^2.45.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
