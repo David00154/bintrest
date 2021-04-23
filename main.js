@@ -52,6 +52,10 @@ app.use("/", IndexRouter);
 app.use("/dashboard", ensureAuthenticated, DashboardRouter);
 app.use("/user", UserRouter);
 
+app.get("/s", (req, res) => {
+  res.send("Hello");
+});
+
 app.listen(process.env.PORT || 3000, console.log("Server running"));
 
 // export { app };
