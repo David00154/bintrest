@@ -36,6 +36,70 @@ const NotificationsSchema = new Schema$1({
 
 const Notification = mongoose__default['default'].model("Notifications", NotificationsSchema);
 
+const Schema = mongoose__default['default'].Schema;
+
+const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
+  balance: {
+    type: String,
+    required: false,
+    default: "0",
+  },
+  withdrawls: {
+    type: String,
+    required: false,
+    default: "0",
+  },
+  earning: {
+    type: String,
+    required: false,
+    default: "0",
+  },
+  deposit: {
+    type: String,
+    required: false,
+    default: "0",
+  },
+  role: {
+    type: String,
+    required: true,
+  },
+  notifications: [{ type: Schema.Types.ObjectId, ref: "Notifications" }],
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const User = mongoose__default['default'].model("User", UserSchema);
+
+const adminGuard = (req, res, next) => {
+  if (req.user.role == "admin") {
+    return next();
+  } else {
+    req.flash(
+      "error_msg",
+      "You are not an admin you can not view that resource"
+    );
+    res.redirect("/user/login");
+  }
+};
+
 // import ensureAuthenticated from "../services/guards/useAuthGuard.js";
 
 const router$1 = express__default['default'].Router();
@@ -172,59 +236,85 @@ router$1.post("/withdraw", (req, res) => {
   // }
 });
 
-const DashboardRouter = router$1;
-
-const Schema = mongoose__default['default'].Schema;
-
-const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: String,
-    required: true,
-  },
-  balance: {
-    type: String,
-    required: false,
-    default: "0",
-  },
-  withdrawls: {
-    type: String,
-    required: false,
-    default: "0",
-  },
-  earning: {
-    type: String,
-    required: false,
-    default: "0",
-  },
-  deposit: {
-    type: String,
-    required: false,
-    default: "0",
-  },
-  role: {
-    type: String,
-    required: true,
-  },
-  notifications: [{ type: Schema.Types.ObjectId, ref: "Notifications" }],
-  date: {
-    type: Date,
-    default: Date.now,
-  },
+router$1.get("/users", adminGuard, (req, res) => {
+  User.find({})
+    .then((data) => {
+      res.render("Users", {
+        user: req.user,
+        pathname: req._parsedOriginalUrl,
+        users: data,
+      });
+    })
+    .catch((e) => console.log(e));
 });
 
-const User = mongoose__default['default'].model("User", UserSchema);
+router$1.get("/send-notifications", adminGuard, (req, res) => {
+  res.render("SendNotifications", {
+    user: req.user,
+    pathname: req._parsedOriginalUrl,
+  });
+});
+
+router$1.post("/send-notifications", adminGuard, (req, res) => {
+  const { id, topic, content } = req.body;
+
+  if (!id || !topic || !content) {
+    req.flash("error_msg", "All fields are required!!");
+
+    res.redirect("/dashboard/send-notifications");
+  } else {
+    const newNotifis = new Notification({
+      user: id,
+      topic,
+      content,
+    });
+    newNotifis
+      .save()
+      .then(() => {
+        req.flash("success_msg", `Notification Sent.`);
+        res.redirect("/dashboard/send-notifications");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+});
+
+router$1.get("/manipulate-user", adminGuard, (req, res) => {
+  res.render("Manipulate", {
+    user: req.user,
+    pathname: req._parsedOriginalUrl,
+  });
+});
+
+router$1.post("/update-user", adminGuard, (req, res) => {
+  const { email, balance, deposit, withdrawals, earnings } = req.body;
+
+  if (!email || !balance || !deposit || !withdrawals || !earnings) {
+    req.flash("error_msg", "All fields are required!!");
+
+    res.redirect("/dashboard/manipulate-user");
+  } else {
+    User.updateOne(
+      { email: email },
+      {
+        balance,
+        deposit,
+        withdrawls: withdrawals,
+        earning: earnings,
+      }
+    )
+      .then(() => {
+        req.flash("success_msg", `User updated`);
+        res.redirect("/dashboard/manipulate-user");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+});
+
+const DashboardRouter = router$1;
 
 const router = express__default['default'].Router();
 
@@ -360,13 +450,13 @@ const ensureAuthenticated = (req, res, next) => {
 
 const app = express__default['default']();
 
-const db1 =
-  "mongodb+srv://davidbriggs:00154abs@cluster001.ueang.mongodb.net/bintrest?retryWrites=true&w=majority";
-
-// const db2 = "mongodb://localhost/bintrest";
+// const db1 =
+//   "mongodb+srv://davidbriggs:00154abs@cluster001.ueang.mongodb.net/bintrest?retryWrites=true&w=majority";
+//
+const db2 = "mongodb://localhost/bintrest";
 _passport(passport__default['default']);
 mongoose__default['default']
-  .connect(db1, {
+  .connect(db2, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

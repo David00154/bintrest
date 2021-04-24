@@ -1,5 +1,7 @@
 import express from "express";
 import Notification from "../models/notifications.model.js";
+import User from "../models/user.model.js";
+import adminGuard from "../services/guards/adminGuard.js";
 // import ensureAuthenticated from "../services/guards/useAuthGuard.js";
 
 const router = express.Router();
@@ -134,6 +136,84 @@ router.post("/withdraw", (req, res) => {
   //   req.flash("error_msg", "Your balance is not yet matured for withdrawals");
   //   res.redirect("/dashboard/withdraw");
   // }
+});
+
+router.get("/users", adminGuard, (req, res) => {
+  User.find({})
+    .then((data) => {
+      res.render("Users", {
+        user: req.user,
+        pathname: req._parsedOriginalUrl,
+        users: data,
+      });
+    })
+    .catch((e) => console.log(e));
+});
+
+router.get("/send-notifications", adminGuard, (req, res) => {
+  res.render("SendNotifications", {
+    user: req.user,
+    pathname: req._parsedOriginalUrl,
+  });
+});
+
+router.post("/send-notifications", adminGuard, (req, res) => {
+  const { id, topic, content } = req.body;
+
+  if (!id || !topic || !content) {
+    req.flash("error_msg", "All fields are required!!");
+
+    res.redirect("/dashboard/send-notifications");
+  } else {
+    const newNotifis = new Notification({
+      user: id,
+      topic,
+      content,
+    });
+    newNotifis
+      .save()
+      .then(() => {
+        req.flash("success_msg", `Notification Sent.`);
+        res.redirect("/dashboard/send-notifications");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+});
+
+router.get("/manipulate-user", adminGuard, (req, res) => {
+  res.render("Manipulate", {
+    user: req.user,
+    pathname: req._parsedOriginalUrl,
+  });
+});
+
+router.post("/update-user", adminGuard, (req, res) => {
+  const { email, balance, deposit, withdrawals, earnings } = req.body;
+
+  if (!email || !balance || !deposit || !withdrawals || !earnings) {
+    req.flash("error_msg", "All fields are required!!");
+
+    res.redirect("/dashboard/manipulate-user");
+  } else {
+    User.updateOne(
+      { email: email },
+      {
+        balance,
+        deposit,
+        withdrawls: withdrawals,
+        earning: earnings,
+      }
+    )
+      .then(() => {
+        req.flash("success_msg", `User updated`);
+        res.redirect("/dashboard/manipulate-user");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 });
 
 const DashboardRouter = router;

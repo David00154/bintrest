@@ -36,7 +36,7 @@ $("document").ready(() => {
   setInterval(() => {
     $("#country")[0].textContent = faker.address.country();
     $("#balance")[0].textContent =
-      "$ " + faker.finance.amount().split(".").join(",");
+      "$" + faker.finance.amount().split(".").join(",") + 0;
     $("#pop-up")[0].classList.toggle("hidden");
     setTimeout(() => {
       $("#pop-up")[0].classList.toggle("hidden");

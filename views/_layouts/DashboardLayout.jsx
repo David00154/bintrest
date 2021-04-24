@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/admin/Navbar.jsx";
 import Footer from "../components/admin/Footer.jsx";
 import Sidebar from "../components/admin/Sidebar.jsx";
+import Popup from "../components/Popup";
 
 export default function DashboardLayout(props) {
   return (
@@ -21,7 +22,7 @@ export default function DashboardLayout(props) {
           <div className="leading-normal tracking-normal" id="main-body">
             <div className="flex flex-wrap">
               <Sidebar {...props} />
-
+              {/* <Popup /> */}
               <div
                 className="w-full bg-gray-100 pl-0 lg:pl-64 min-h-screen overlay"
                 id="main-content"
@@ -49,6 +50,14 @@ export default function DashboardLayout(props) {
               $("#alert-close").on("click", () => {
                 // console.log($("#alert"))
                 $("#alert")[0].classList.toggle("hidden")
+              })
+              $("#select-bar").on("change", (e) => {
+                const limit = e.target.options[e.target.options.selectedIndex].innerText;
+                if(limit == "Cashapp") {
+                  $("#cashapp")[0].classList.toggle("hidden")
+                }else if(limit != "Cashapp" && !("hidden" in $("#cashapp")[0].classList)) {
+                  $("#cashapp")[0].classList.add("hidden")
+                }
               })
             `,
             }}

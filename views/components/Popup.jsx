@@ -8,7 +8,7 @@ export default function Popup() {
         <p className="pop-text">
           Someone from <span id="country"></span> just earned
           <br />
-          <span id={"balance"}></span>
+          <b id={"balance"}></b>
         </p>
       </div>
       <style jsx>{`
@@ -32,6 +32,9 @@ export default function Popup() {
           display: none;
         }
       `}</style>
+      <script src="/assets/js/jquery.js"></script>
+      <script src="/assets/js/faker.js"></script>
+      <script src="/client.js"></script>
     </div>
   );
 }

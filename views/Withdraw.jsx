@@ -141,7 +141,7 @@ export default function Withdraw(props) {
 
             <select
               name="select"
-              id=""
+              id="select-bar"
               className="focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3 cursor-pointer"
             >
               <option
@@ -184,10 +184,11 @@ export default function Withdraw(props) {
 
             <input
               type="text"
+              id="cashapp"
               placeholder="Cash App Hash Tag"
               name="cash_app"
               className={
-                "focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3"
+                "hidden focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3"
               }
             />
 
