@@ -14,9 +14,9 @@ export default function Footer(params) {
                   <p>
                     Miami, Florida <br />
                     <br />
-                    {/* <br />
-                    <strong>Phone:</strong> +1 5589 55488 55
-                    <br /> */}
+                    <br />
+                    <strong>Phone:</strong> + (531) 333-2212
+                    <br />
                     <strong>Email:</strong> bintrest-trade@gmail.com
                     <br />
                   </p>

@@ -9,6 +9,7 @@ import { createEngine } from "express-react-views";
 import passport from "passport";
 import _passport from "./services/passport.js";
 import ensureAuthenticated from "./services/guards/useAuthGuard.js";
+import Notification from "./models/notifications.model.js";
 
 import mongoose from "mongoose";
 
@@ -40,11 +41,32 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.use(function (req, res, next) {
+app.use(async function (req, res, next) {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error");
-  res.locals._url = req.url;
+  // res.locals._url = req.url;
+  if (req.isAuthenticated()) {
+    // let notifis;
+    // Notification.find({ user: req.user._id, opened: false })
+    //   .then((data) => {
+    //     notifis = data.length;
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
+    // res.locals.notificationCount = notifis;
+
+    try {
+      const data = await Notification.find({
+        user: req.user._id,
+        opened: false,
+      });
+      res.locals.notificationCount = data.length;
+    } catch (e) {
+      console.log(e);
+    }
+  }
   next();
 });
 
@@ -60,4 +82,4 @@ app.listen(process.env.PORT || 3000, console.log("Server running"));
 
 // export { app };
 
-module.exports = app;
+// module.exports = app;

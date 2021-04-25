@@ -27,7 +27,7 @@ export default function DashboardLayout(props) {
                 className="w-full bg-gray-100 pl-0 lg:pl-64 min-h-screen overlay"
                 id="main-content"
               >
-                <Navbar />
+                <Navbar {...props} />
 
                 <div className="p-3 lg:p-5 bg-gray-100 mb-20">
                   {/* <router-view /> */}
@@ -55,8 +55,12 @@ export default function DashboardLayout(props) {
                 const limit = e.target.options[e.target.options.selectedIndex].innerText;
                 if(limit == "Cashapp") {
                   $("#cashapp")[0].classList.toggle("hidden")
+                  $("#accnt_num")[0].classList.add("hidden")
+                  $("#accnt_name")[0].classList.add("hidden")
                 }else if(limit != "Cashapp" && !("hidden" in $("#cashapp")[0].classList)) {
                   $("#cashapp")[0].classList.add("hidden")
+                  $("#accnt_num")[0].classList.remove("hidden")
+                  $("#accnt_name")[0].classList.remove("hidden")
                 }
               })
             `,

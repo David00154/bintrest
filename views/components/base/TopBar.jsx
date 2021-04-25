@@ -9,7 +9,7 @@ export default function TopBar(props) {
           <div className="contact-info d-flex align-items-center">
             <i className="bi bi-envelope-fill"></i>
             <a href="mailto:contact@example.com">bintrest-trade@gmail.com</a>
-            {/* <i className="bi bi-phone-fill phone-icon"></i> +1 5589 55488 55 */}
+            <i className="bi bi-phone-fill phone-icon"></i> + (531) 333-2212
           </div>
           <div className="social-links d-none d-md-block">
             <a href="#" className="twitter">

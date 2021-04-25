@@ -41,7 +41,7 @@ export default function Notifis(props) {
             </div>
             <div className="ml-3 flex-1">
               <span className="lg:text-lg text-sm font-medium mb-1">
-                From Admin:
+                From Bintrest Trade:
               </span>
               <p className="lg:text-lg text-sm font-medium mb-1">
                 Subject: {props._doc.topic}
@@ -54,7 +54,9 @@ export default function Notifis(props) {
               <svg
                 viewBox="0 0 8 8"
                 fill="currentColor"
-                className="h-4 w-4 text-blue"
+                className={`h-4 w-4 ${
+                  props._doc.opened == true ? "text-green-500" : "text-red-500"
+                }`}
               >
                 <circle cx="4" cy="4" r="3"></circle>
               </svg>

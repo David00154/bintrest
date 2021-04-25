@@ -1,23 +1,13 @@
-'use strict';
+import express from 'express';
+import { join, resolve } from 'path';
+import mongoose from 'mongoose';
+import passport from 'passport';
+import flash from 'connect-flash';
+import session from 'express-session';
+import { createEngine } from 'express-react-views';
+import { Strategy } from 'passport-local';
 
-var express = require('express');
-var path = require('path');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var flash = require('connect-flash');
-var session = require('express-session');
-var expressReactViews = require('express-react-views');
-var passportLocal = require('passport-local');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var express__default = /*#__PURE__*/_interopDefaultLegacy(express);
-var mongoose__default = /*#__PURE__*/_interopDefaultLegacy(mongoose);
-var passport__default = /*#__PURE__*/_interopDefaultLegacy(passport);
-var flash__default = /*#__PURE__*/_interopDefaultLegacy(flash);
-var session__default = /*#__PURE__*/_interopDefaultLegacy(session);
-
-const router$2 = express__default['default'].Router();
+const router$2 = express.Router();
 
 router$2.get("/", (req, res) => {
   res.render("Index");
@@ -25,18 +15,23 @@ router$2.get("/", (req, res) => {
 
 const IndexRouter = router$2;
 
-const Schema$1 = mongoose__default['default'].Schema;
+const Schema$1 = mongoose.Schema;
 
 const NotificationsSchema = new Schema$1({
   user: { type: Schema$1.Types.ObjectId, ref: "User" },
   content: { type: String, required: true },
   topic: { type: String, required: true },
+  opened: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   date: { type: Date, default: new Date() },
 });
 
-const Notification = mongoose__default['default'].model("Notifications", NotificationsSchema);
+const Notification = mongoose.model("Notifications", NotificationsSchema);
 
-const Schema = mongoose__default['default'].Schema;
+const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   name: {
@@ -86,7 +81,7 @@ const UserSchema = new Schema({
   },
 });
 
-const User = mongoose__default['default'].model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 const adminGuard = (req, res, next) => {
   if (req.user.role == "admin") {
@@ -102,7 +97,7 @@ const adminGuard = (req, res, next) => {
 
 // import ensureAuthenticated from "../services/guards/useAuthGuard.js";
 
-const router$1 = express__default['default'].Router();
+const router$1 = express.Router();
 router$1.get("/", (req, res) => {
   res.render("Dashboard", { user: req.user, pathname: req._parsedOriginalUrl });
 });
@@ -112,10 +107,25 @@ router$1.get("/deposit", (req, res) => {
   res.render("Deposit", { user: req.user, pathname: req._parsedOriginalUrl });
 });
 
-router$1.get("/notification/:id", (req, res) => {
+router$1.get("/notification/:id", async (req, res) => {
   const { id } = req.params;
 
-  Notification.findOne({ _id: id }).then(({ topic, content, date }) => {
+  // Notification.findOne({ _id: id }).then(({ topic, content, date }) => {
+  //   Notification.updateOne().then(() => {
+  //     res.render("Notification", {
+  //       user: req.user,
+  //       pathname: req._parsedOriginalUrl,
+  //       topic,
+  //       content,
+  //       date,
+  //     });
+  //   });
+  // });
+
+  try {
+    const { topic, content, date } = await Notification.findOne({ _id: id });
+
+    const update = await Notification.updateOne({ _id: id }, { opened: true });
     res.render("Notification", {
       user: req.user,
       pathname: req._parsedOriginalUrl,
@@ -123,7 +133,9 @@ router$1.get("/notification/:id", (req, res) => {
       content,
       date,
     });
-  });
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 router$1.get("/withdraw", (req, res) => {
@@ -141,6 +153,37 @@ router$1.get("/notifications", (req, res) => {
       notifications: notifis,
     });
   });
+});
+
+router$1.get("/delete-user", adminGuard, (req, res) => {
+  res.render("DeleteUser", {
+    user: req.user,
+    pathname: req._parsedOriginalUrl,
+  });
+});
+
+router$1.post("/delete-user", adminGuard, (req, res) => {
+  const { id } = req.body;
+
+  if (!id) {
+    req.flash("error_msg", "All fields are required");
+    res.redirect("/dashboard/delete-user");
+  } else {
+    User.deleteOne({ _id: id })
+      .then(() => {
+        if (id == req.user._id) {
+          req.logout();
+          req.flash("error", "You fool you have deleted your self");
+          res.redirect("/user/login");
+        } else {
+          req.flash("success_msg", "User deleted!");
+          res.redirect("/dashboard/delete-user");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 });
 
 router$1.post("/withdraw", (req, res) => {
@@ -316,7 +359,7 @@ router$1.post("/update-user", adminGuard, (req, res) => {
 
 const DashboardRouter = router$1;
 
-const router = express__default['default'].Router();
+const router = express.Router();
 
 router.get("/login", (req, res) => {
   res.render("SignIn");
@@ -327,7 +370,7 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/login", (req, res, next) => {
-  passport__default['default'].authenticate("local", {
+  passport.authenticate("local", {
     successRedirect: "/dashboard",
     failureRedirect: "/user/login",
     failureFlash: true,
@@ -409,7 +452,7 @@ const UserRouter = router;
 
 const _passport = function (passport) {
   passport.use(
-    new passportLocal.Strategy({ usernameField: "email" }, (email, password, done) => {
+    new Strategy({ usernameField: "email" }, (email, password, done) => {
       // Match user
       User.findOne({
         email: email,
@@ -448,39 +491,60 @@ const ensureAuthenticated = (req, res, next) => {
   }
 };
 
-const app = express__default['default']();
+const app = express();
 
 const db1 =
   "mongodb+srv://davidbriggs:00154abs@cluster001.ueang.mongodb.net/bintrest?retryWrites=true&w=majority";
 //
 // const db2 = "mongodb://localhost/bintrest";
-_passport(passport__default['default']);
-mongoose__default['default']
+_passport(passport);
+mongoose
   .connect(db1, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
-app.use(express__default['default'].static(path.join(path.resolve(), "static")));
-app.set("views", path.join(path.resolve(), "views"));
+app.use(express.static(join(resolve(), "static")));
+app.set("views", join(resolve(), "views"));
 app.set("view engine", "jsx");
-app.engine("jsx", expressReactViews.createEngine({}));
+app.engine("jsx", createEngine({}));
 
-app.use(express__default['default'].urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
-app.use(session__default['default']({ secret: "secret", resave: true, saveUninitialized: true }));
+app.use(session({ secret: "secret", resave: true, saveUninitialized: true }));
 
-app.use(passport__default['default'].initialize());
-app.use(passport__default['default'].session());
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(flash__default['default']());
+app.use(flash());
 
-app.use(function (req, res, next) {
+app.use(async function (req, res, next) {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error");
-  res.locals._url = req.url;
+  // res.locals._url = req.url;
+  if (req.isAuthenticated()) {
+    // let notifis;
+    // Notification.find({ user: req.user._id, opened: false })
+    //   .then((data) => {
+    //     notifis = data.length;
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
+    // res.locals.notificationCount = notifis;
+
+    try {
+      const data = await Notification.find({
+        user: req.user._id,
+        opened: false,
+      });
+      res.locals.notificationCount = data.length;
+    } catch (e) {
+      console.log(e);
+    }
+  }
   next();
 });
 
@@ -496,4 +560,4 @@ app.listen(process.env.PORT || 3000, console.log("Server running"));
 
 // export { app };
 
-module.exports = app;
+// module.exports = app;

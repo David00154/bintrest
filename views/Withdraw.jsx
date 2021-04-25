@@ -195,17 +195,19 @@ export default function Withdraw(props) {
             <div className="flex flex-row justify-center w-full mb-3">
               <input
                 type="text"
+                id="accnt_num"
                 className="focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3 mr-3"
                 placeholder="Account Number"
                 name="accnt_num"
-                value={props.address || ""}
+                value={"account number"}
               />
               <input
                 type="text"
                 className="focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3"
                 placeholder="Account Name"
                 name="accnt_name"
-                value={props.amount || ""}
+                id="accnt_name"
+                value={"account name"}
               />
             </div>
 

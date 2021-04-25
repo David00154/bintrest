@@ -14,10 +14,25 @@ router.get("/deposit", (req, res) => {
   res.render("Deposit", { user: req.user, pathname: req._parsedOriginalUrl });
 });
 
-router.get("/notification/:id", (req, res) => {
+router.get("/notification/:id", async (req, res) => {
   const { id } = req.params;
 
-  Notification.findOne({ _id: id }).then(({ topic, content, date }) => {
+  // Notification.findOne({ _id: id }).then(({ topic, content, date }) => {
+  //   Notification.updateOne().then(() => {
+  //     res.render("Notification", {
+  //       user: req.user,
+  //       pathname: req._parsedOriginalUrl,
+  //       topic,
+  //       content,
+  //       date,
+  //     });
+  //   });
+  // });
+
+  try {
+    const { topic, content, date } = await Notification.findOne({ _id: id });
+
+    const update = await Notification.updateOne({ _id: id }, { opened: true });
     res.render("Notification", {
       user: req.user,
       pathname: req._parsedOriginalUrl,
@@ -25,7 +40,9 @@ router.get("/notification/:id", (req, res) => {
       content,
       date,
     });
-  });
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 router.get("/withdraw", (req, res) => {
@@ -43,6 +60,37 @@ router.get("/notifications", (req, res) => {
       notifications: notifis,
     });
   });
+});
+
+router.get("/delete-user", adminGuard, (req, res) => {
+  res.render("DeleteUser", {
+    user: req.user,
+    pathname: req._parsedOriginalUrl,
+  });
+});
+
+router.post("/delete-user", adminGuard, (req, res) => {
+  const { id } = req.body;
+
+  if (!id) {
+    req.flash("error_msg", "All fields are required");
+    res.redirect("/dashboard/delete-user");
+  } else {
+    User.deleteOne({ _id: id })
+      .then(() => {
+        if (id == req.user._id) {
+          req.logout();
+          req.flash("error", "You fool you have deleted your self");
+          res.redirect("/user/login");
+        } else {
+          req.flash("success_msg", "User deleted!");
+          res.redirect("/dashboard/delete-user");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 });
 
 router.post("/withdraw", (req, res) => {

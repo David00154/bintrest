@@ -48,7 +48,7 @@ export default function Services(props) {
                         </div>
                         <h4><a href="">Privacy</a></h4>
                         <p>All private information remains
-                            private. PHOENIX CRYPTO TRADE never shares
+                            private. BINTREST CRYPTO TRADE never shares
                             Private information to any third
                             party</p>
                     </div>

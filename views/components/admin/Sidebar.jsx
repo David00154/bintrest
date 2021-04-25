@@ -181,6 +181,16 @@ export default function Sidebar(props) {
               Send Notifications
             </span>
           </a>
+          <a
+            href="/dashboard/delete-user"
+            className={`w-full flex items-center text-blue-400 h-10 pl-4 ${
+              props.pathname.href in paths ? "bg-gray-200" : "hover:bg-gray-200"
+            } rounded-lg cursor-pointer`}
+          >
+            <span className="text-gray-700 text-lg font-medium">
+              Delete User
+            </span>
+          </a>
         </div>
 
         {/* <div className="mb-4 px-4">

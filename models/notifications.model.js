@@ -6,6 +6,11 @@ const NotificationsSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
   content: { type: String, required: true },
   topic: { type: String, required: true },
+  opened: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   date: { type: Date, default: new Date() },
 });
 
