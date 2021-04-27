@@ -17,7 +17,7 @@ export default function Contact(params) {
               <div class="info-box mb-4">
                 <i class="bx bx-map"></i>
                 <h3>Our Address</h3>
-                <p>Miami, Florida</p>
+                <p>Mariola Ct, Algardi Ave</p>
               </div>
             </div>
 
@@ -33,7 +33,7 @@ export default function Contact(params) {
               <div class="info-box  mb-4">
                 <i class="bx bx-phone-call"></i>
                 <h3>Call Us</h3>
-                {/* <p>+1 5589 55488 55</p> */}
+                <p>+ (531) 333-2212</p>
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ export default function Footer(params) {
                 <div class="footer-info">
                   <h3>BINTREST CRYPTO TRADE</h3>
                   <p>
-                    Miami, Florida <br />
+                    Mariola Ct, Algardi Ave <br />
                     <br />
                     <br />
                     <strong>Phone:</strong> + (531) 333-2212
