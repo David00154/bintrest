@@ -128,10 +128,10 @@ router.post("/withdraw", (req, res) => {
     req.flash("error_msg", "Passwords does not match");
     res.redirect("/dashboard/withdraw");
   }
-  if (select == "option") {
-    req.flash("error_msg", "Select a valid payment option");
-    res.redirect("/dashboard/withdraw");
-  }
+  // if (select == "option") {
+  //   req.flash("error_msg", "Select a valid payment option");
+  //   res.redirect("/dashboard/withdraw");
+  // }
   if (password !== req.user.password) {
     req.flash(
       "error_msg",
