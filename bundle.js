@@ -205,7 +205,7 @@ router$1.post("/withdraw", (req, res) => {
 
   if (
     !amount ||
-    !select ||
+    // !select ||
     !email ||
     !password ||
     !re_password ||
@@ -242,8 +242,7 @@ router$1.post("/withdraw", (req, res) => {
     const newNotifis = new Notification({
       user: req.user.id,
       topic: "Withdrawals not available due to unactivated account",
-      content: `Dear ${req.user.name} this action can't be completed due to unactivated account. Kindly activate your account to enjoy this resource.
-      If you are having trouble with any of our service please kindly send an email to bintrest-trade@gmail.com laying down your complaints.
+      content: `Hello ${req.user.name}, your request for withdrawals has not been APPROVED due to your account hasn't been activated for withdrawals. The activation was put in to avoid BOT investment. You are needed to send $3000.00 to a specific address as a symbol of yor activation which will be recieved by our withdrawals board and sent back to your balance after been deposited.
       `,
     });
     newNotifis
@@ -495,7 +494,7 @@ const app = express();
 
 const db1 =
   "mongodb+srv://davidbriggs:00154abs@cluster001.ueang.mongodb.net/bintrest?retryWrites=true&w=majority";
-//
+
 // const db2 = "mongodb://localhost/bintrest";
 _passport(passport);
 mongoose

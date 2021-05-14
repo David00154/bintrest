@@ -162,6 +162,9 @@ export default function Withdraw(props) {
               >
                 Flutterwave
               </option>
+              <option value="bank" className="p-3 text-lg font-normal bg-white">
+                Bank Deposit
+              </option>
               <option
                 value="cashapp"
                 className="p-3 text-lg font-normal bg-white"
@@ -199,15 +202,15 @@ export default function Withdraw(props) {
                 className="focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3 mr-3"
                 placeholder="Account Number"
                 name="accnt_num"
-                value={"account number"}
+                // value={"account number"}
               />
               <input
                 type="text"
                 className="focus:outline-none focus:ring focus:border-blue-300 p-3 text-lg font-normal border-black rounded-md w-full mb-3"
-                placeholder="Account Name"
+                placeholder="Bank Name"
                 name="accnt_name"
                 id="accnt_name"
-                value={"account name"}
+                // value={"account name"}
               />
             </div>
 

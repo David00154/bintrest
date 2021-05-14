@@ -17,7 +17,7 @@ const app = express();
 
 const db1 =
   "mongodb+srv://davidbriggs:00154abs@cluster001.ueang.mongodb.net/bintrest?retryWrites=true&w=majority";
-//
+
 // const db2 = "mongodb://localhost/bintrest";
 _passport(passport);
 mongoose

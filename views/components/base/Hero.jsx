@@ -12,7 +12,7 @@ export default function Hero(params) {
           data-aos-delay="500"
         >
           <h1 className="typing">
-            JOIN THOUSANDS WHO HAS STARTED TRADING WITH BINTREST CRYPTO TRADE
+            JOIN THOUSANDS WHO HAVE STARTED TRADING WITH BINTREST CRYPTO TRADE
           </h1>
           <h2 className="">We are reliable, simple and innovative</h2>
           <a href="/dashboard" className="btn-get-started scrollto">

@@ -20,7 +20,8 @@ export default function Pricing() {
             <div className="box">
               <h3>KILO</h3>
               <h4>
-                <sup>$</sup>200<span> / month</span>
+                <sup>$</sup>200
+                {/* <span> / month</span> */}
               </h4>
               <ul>
                 <li>BITCOIN MINIG / TRADING</li>
@@ -42,7 +43,8 @@ export default function Pricing() {
             <div className="box featured">
               <h3>MEGA</h3>
               <h4>
-                <sup>$</sup>500<span> / month</span>
+                <sup>$</sup>500
+                {/* <span> / month</span> */}
               </h4>
               <ul>
                 <li>BITCOIN MINING / TRADING </li>
@@ -68,7 +70,8 @@ export default function Pricing() {
             <div className="box">
               <h3>GIGA</h3>
               <h4>
-                <sup>$</sup>1,000<span> / month</span>
+                <sup>$</sup>1,000
+                {/* <span> / month</span> */}
               </h4>
               <ul>
                 <li>BITCOIN MINING / TRADING</li>
