@@ -15,26 +15,37 @@ export default function SignIn(props) {
         <form className="form-signin" action="/user/login" method="POST">
           <h2 className="text-center mb-3">Login</h2>
           <div className="mb-3">
-            <input
-              type="email"
-              id="inputEmail"
-              className="form-control"
-              placeholder="Email address"
-              required
-              name="email"
-              autofocus
-            />
+            <div className="input-group-prepend" style={{ display: "flex" }}>
+              <span className="input-group-text">
+                <span className="bx bxs-message"></span>
+              </span>
+              <input
+                type="email"
+                id="inputEmail"
+                className="form-control"
+                placeholder="Email address"
+                required
+                name="email"
+                autofocus
+              />
+            </div>
           </div>
           <div className="mb-3">
-            <input
-              type="password"
-              id="inputPassword"
-              className="form-control"
-              placeholder="Password"
-              required
-              name="password"
-            />
+            <div className="input-group-prepend" style={{ display: "flex" }}>
+              <span className="input-group-text">
+                <span className="bx bxs-key"></span>
+              </span>
+              <input
+                type="password"
+                id="inputPassword"
+                className="form-control"
+                placeholder="Password"
+                required
+                name="password"
+              />
+            </div>
           </div>
+
           {/* <div id="remember" className="checkbox mb-3">
             <label>
               <input type="checkbox" value="remember-me" /> Remember me
